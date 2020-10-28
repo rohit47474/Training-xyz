@@ -1,0 +1,100 @@
+BrowserModule	@angular/platform-browser	When you want to run your app in a browser
+CommonModule	@angular/common	When you want to use NgIf, NgFor
+FormsModule	@angular/forms	When you want to build template driven forms (includes NgModel)
+ReactiveFormsModule	@angular/forms	When you want to build reactive forms
+RouterModule	@angular/router	When you want to use RouterLink, .forRoot(), and .forChild()
+HttpClientModule	@angular/common/http	When you want to talk to a server
+Importing modules
+
+//our root app component
+import { Component, NgModule, VERSION } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+@Component({
+  selector: 'my-app',
+  template: `
+    <div>
+      <h1>Hi {{ name }}</h1>
+      <p>
+        Start editing and you will see your changes reflected immediately!
+      </p>
+    </div>
+  `,
+})
+export class App {
+  name: string;
+  constructor() {
+    this.name = `Angular! v${VERSION.full}`;
+  }
+}
+
+@NgModule({
+  imports: [BrowserModule],
+  declarations: [App],
+  bootstrap: [App],
+})
+export class AppModule {}
+
+
+ngif:
+@Component({
+  selector: 'my-app',
+  template: `
+   <div *ngIf="a>b; else display">
+      a is max  {{a}}
+    </div>
+    <ng-template #display>b is max {{b}} </ng-template>
+  `,
+})
+export class App {
+  name: string="Hello world angular"
+  a=10;
+  b=15;
+}
+
+ngfor:
+@Component({
+  selector: 'my-app',
+  template: `
+   <ul>
+      <li *ngFor="let movie of Movies">
+        {{ movie.name }}
+      </li>
+    </ul>
+  `,
+})
+export class App {
+ Movies: any[] = [
+    {
+      "name": "Avengers: Endgame"
+    },
+    {
+      "name": "Die Hard"
+    },
+    {
+      "name": "Oceans 11"
+    },
+    {
+      "name": "Spider Man"
+    }
+  ];
+}
+
+
+ngswitch:
+
+@Component({
+  selector: 'my-app',
+  template: `
+   <ul [ngSwitch]="superhero">
+  <li *ngSwitchCase="1">Ironman</li>
+  <li *ngSwitchCase="2">Hulk</li>
+  <li *ngSwitchCase="3">Thor</li>
+  <li *ngSwitchCase="4">Spiderman</li>
+  <li *ngSwitchDefault>Batman</li>
+</ul>
+  `,
+})
+export class App {
+superhero = 1;
+}
